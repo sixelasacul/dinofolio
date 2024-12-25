@@ -1,11 +1,84 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// const searchableFields: (keyof CollectionEntry<"dinos">["data"])[] = [
+//   "colors",
+//   "tools",
+//   "title",
+//   "description",
+//   "dinosaurs",
+// ];
+// const query = (Astro.url.searchParams.get("q") ?? "").split(/\s/);
+// console.log(Astro.url)
+// const dinos = (
+//   await getCollection("dinos", ({ data }) => {
+//     if (query.length === 0) {
+//       return true;
+//     }
+//     // peut-être qu'on peut applatir tous les champs (tableaux et textes), ça
+//     // ça pourrait simplifier la logique, mais je sais pas si ça serait performant
+//     // (y a que 6 éléments dans la liste, bon)
+//     const flatten = searchableFields.reduce(
+//       (acc, field) =>
+//         Array.isArray(data[field])
+//           ? (acc += data[field].join(""))
+//           : (acc += data[field]),
+//       ""
+//     );
+//     return query.some((term) => flatten.includes(term));
+//   })
+// ).toSorted(
+//   (first, second) =>
+//     first.data.createdAt.getTime() - second.data.createdAt.getTime()
+// );
+const dinos = (await getCollection("dinos")).toSorted(
+  (first, second) =>
+    first.data.createdAt.getTime() - second.data.createdAt.getTime()
+);
 ---
 
 <Layout>
-	<Welcome />
+  <div class="grid grid-cols-1 gap-4 place-items-center">
+    <ul class="grid grid-cols-3 gap-4">
+      {
+        dinos.map((dino) => (
+          <li>
+            <a href={`/dinos/${dino.id}`}>
+              {/* pas de transition sur le gradient, c'est pas ouf */}
+              <div class="rounded-xl flex flex-col items-center gap-2 p-1 bg-gradient-to-tr hover:bg-gradient-to-tr from-purple-500 to-pink-500 transition-all hover:from-pink-500 hover:to-purple-500 hover:p-4 hover:gap-0 hover:pb-6 group">
+                <Image
+                  transition:name={`image-${dino.id}`}
+                  class="rounded-xl transition-transform rotate-0 group-hover:rotate-2"
+                  src={dino.data.image}
+                  alt={dino.data.title}
+									loading='eager'
+                />
+                <p class="text-slate-50 font-bold transition-transform rotate-0 group-hover:rotate-2">
+                  {dino.data.title}
+                </p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <!-- <div
+      class="sticky bottom-0 bg-gradient-to-tr from-purple-500 to-pink-500 p-2 rounded-full"
+    >
+      <form>
+        <label class="text-slate-50">
+          Chercher
+          <input
+            class="rounded-full text-slate-900 p-1"
+            type="search"
+            name="q"
+            placeholder="Dinosaures, outils, couleurs..."
+          />
+        </label>
+      </form>
+    </div>
+  </div> -->
+  </div>
 </Layout>

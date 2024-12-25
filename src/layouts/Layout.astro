@@ -1,22 +1,60 @@
+---
+import { ClientRouter } from 'astro:transitions';
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Dinofolio - Laurazaurus</title>
+    <ClientRouter />
+  </head>
+  <body class="p-4">
+    <slot />
+    <!-- <div class="overflow-hidden h-full w-screen absolute">
+      <div id="background"></div>
+    </div>
+    <div>
+      <slot />
+    </div> -->
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  @font-face {
+    font-family: "Monaspace Xenon";
+    src: url("/fonts/MonaspaceXenonVarVF[wght,wdth,slnt].woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Monaspace Radon";
+    src: url("/fonts/MonaspaceRadonVarVF[wght,wdth,slnt].woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  html,
+  body {
+    font-family: "Monaspace Radon";
+  }
+  body {
+    background: repeating-conic-gradient(#000 0% 25%, transparent 0% 50%) 50% /
+      160px 160px;
+  }
+
+  /* https://stackoverflow.com/questions/35361986/css-gradient-checkerboard-pattern */
+  /* #background {
+    position: absolute;
+    inset: -50%;
+    height: 200vh;
+    width: 200vw;
+    transform: rotate(20deg);
+    background: repeating-conic-gradient(#000 0% 25%, transparent 0% 50%) 50% /
+      160px 160px;
+  } */
 </style>

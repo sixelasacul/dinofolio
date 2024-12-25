@@ -1,0 +1,54 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = (async () => {
+  const dinos = await getCollection("dinos");
+  return dinos.map((dino) => ({
+    params: {
+      dino: dino.id,
+    },
+    props: dino.data,
+  }));
+}) satisfies GetStaticPaths;
+
+const { dino } = Astro.params;
+const props = Astro.props;
+---
+
+<Layout>
+  <div class="flex flex-row gap-4 items-center text-slate-50">
+    <div
+      class="rounded-3xl bg-gradient-to-tr from-purple-500 to-pink-500 basis-2/3 p-1"
+    >
+      <Image
+        transition:name={`image-${dino}`}
+        class="rounded-3xl"
+        src={props.image}
+        alt={props.title}
+        loading="eager"
+      />
+    </div>
+    <div
+      class="bg-gradient-to-tr from-purple-500 to-pink-500 basis-1/3 p-1 rounded-xl grid grid-cols-1 gap-4"
+    >
+      <p class="font-bold">
+        {props.title}
+      </p>
+      <div>
+        <p>Outils utilisés</p>
+        <ul class="list-inside list-disc">
+          {props.tools.map((tool) => <li>{tool}</li>)}
+        </ul>
+      </div>
+      <div>
+        <p>Couleurs principales</p>
+        <ul class="list-inside list-disc">
+          {props.colors.map((colors) => <li>{colors}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+</Layout>
