@@ -1,6 +1,5 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
@@ -23,7 +22,8 @@ const props = Astro.props;
     <div
       class="rounded-3xl bg-gradient-to-tr from-purple-500 to-pink-500 basis-2/3 p-1"
     >
-      <Image
+      {/* <Image> */}
+      <img
         transition:name={`image-${dino}`}
         class="rounded-3xl"
         src={props.image}
