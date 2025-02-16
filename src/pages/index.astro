@@ -46,9 +46,11 @@ const dinos = (await getCollection("dinos")).toSorted(
         dinos.map((dino) => (
           <li>
             <a href={`/dinos/${dino.id}`}>
+              {/* Tailwind v4? */}
               {/* pas de transition sur le gradient, c'est pas ouf */}
               <div class="rounded-xl flex flex-col items-center gap-2 p-1 bg-gradient-to-tr hover:bg-gradient-to-tr from-purple-500 to-pink-500 transition-all hover:from-pink-500 hover:to-purple-500 hover:p-4 hover:gap-0 hover:pb-6 group">
-                <Image
+                {/* <Image> */}
+                <img
                   transition:name={`image-${dino.id}`}
                   class="rounded-xl transition-transform rotate-0 group-hover:rotate-2"
                   src={dino.data.image}
