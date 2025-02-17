@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~tina/*": ["tina/__generated__/*"]
+      "~tina/*": ["tina/__generated__/*"],
+      "~**/*": ["src/**/*"]
     }
   },
   "include": [".astro/types.d.ts", "**/*"],

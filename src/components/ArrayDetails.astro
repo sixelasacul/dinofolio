@@ -1,0 +1,13 @@
+---
+interface Props {
+  label: string
+  list: string[]
+} 
+const { label, list } = Astro.props
+---
+<div>
+  <p>{label}</p>
+  <ul class="list-inside list-disc">
+    {list.map((item) => <li>{item}</li>)}
+  </ul>
+</div>

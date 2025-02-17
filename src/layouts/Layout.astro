@@ -13,14 +13,14 @@ import "../styles/global.css";
     <title>Dinofolio - Laurazaurus</title>
     <ClientRouter />
   </head>
-  <body class="p-4">
+  <!-- <body class="p-4">
     <slot />
-    <!-- <div class="overflow-hidden h-full w-screen absolute">
-      <div id="background"></div>
-    </div>
-    <div>
+  </body> -->
+  <body class="overflow-hidden">
+    <div class="p-4 h-screen overflow-y-scroll">
       <slot />
-    </div> -->
+    </div>
+    <div id="background"></div>
   </body>
 </html>
 
@@ -43,19 +43,16 @@ import "../styles/global.css";
   body {
     font-family: "Monaspace Radon";
   }
-  body {
-    background: repeating-conic-gradient(#000 0% 25%, transparent 0% 50%) 50% /
-      160px 160px;
-  }
 
   /* https://stackoverflow.com/questions/35361986/css-gradient-checkerboard-pattern */
-  /* #background {
+  #background {
     position: absolute;
+    z-index: -1;
     inset: -50%;
     height: 200vh;
     width: 200vw;
     transform: rotate(20deg);
     background: repeating-conic-gradient(#000 0% 25%, transparent 0% 50%) 50% /
       160px 160px;
-  } */
+  }
 </style>

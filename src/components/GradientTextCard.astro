@@ -1,0 +1,10 @@
+---
+interface Props {
+  class?: string
+  isAnimated?: boolean
+} 
+const { class: className, isAnimated = false, ...rest } = Astro.props
+---
+<div class:list={["bg-linear-to-tr from-orange-500 to-green-600", { 'transition-colors duration-300 hover:from-green-600 hover:via-orange-500 hover:to-green-600': isAnimated }, className]} {...rest}>
+  <slot />
+</div>

@@ -1,7 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import Layout from "~layouts/Layout.astro";
+import GradientImageCard from "~components/GradientImageCard.astro";
 
 // const searchableFields: (keyof CollectionEntry<"dinos">["data"])[] = [
 //   "colors",
@@ -41,26 +42,26 @@ const dinos = (await getCollection("dinos")).toSorted(
 
 <Layout>
   <div class="grid grid-cols-1 gap-4 place-items-center">
-    <ul class="grid grid-cols-3 gap-4">
+    <ul class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
       {
         dinos.map((dino) => (
           <li>
             <a href={`/dinos/${dino.id}`}>
-              {/* Tailwind v4? */}
-              {/* pas de transition sur le gradient, c'est pas ouf */}
-              <div class="rounded-xl flex flex-col items-center gap-2 p-1 bg-gradient-to-tr hover:bg-gradient-to-tr from-purple-500 to-pink-500 transition-all hover:from-pink-500 hover:to-purple-500 hover:p-4 hover:gap-0 hover:pb-6 group">
-                {/* <Image> */}
-                <img
-                  transition:name={`image-${dino.id}`}
-                  class="rounded-xl transition-transform rotate-0 group-hover:rotate-2"
-                  src={dino.data.image}
-                  alt={dino.data.title}
-									loading='eager'
-                />
-                <p class="text-slate-50 font-bold transition-transform rotate-0 group-hover:rotate-2">
-                  {dino.data.title}
-                </p>
-              </div>
+              <GradientImageCard isAnimated class="rounded-2xl">
+                <div class="flex flex-col items-center transition-all gap-2 p-4 hover:p-8 hover:gap-0 hover:pb-10 group w-md">
+                  {/* <Image> */}
+                  <img
+                    transition:name={`image-${dino.id}`}
+                    class="rounded-2xl w-md aspect-square object-cover transition-transform rotate-0 group-hover:rotate-2"
+                    src={dino.data.image}
+                    alt={dino.data.title}
+                    loading='eager'
+                  />
+                  <p class="text-slate-50 font-bold transition-transform rotate-0 group-hover:rotate-2">
+                    {dino.data.title}
+                  </p>
+                </div>
+              </GradientImageCard>
             </a>
           </li>
         ))
