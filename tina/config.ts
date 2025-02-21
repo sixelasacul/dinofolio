@@ -27,7 +27,7 @@ export default defineConfig({
   },
   search: {
     tina: {
-      indexerToken: "036b51564f830955132ace5f6d3d3de356b4fe1b",
+      indexerToken: process.env.TINA_SEARCH_TOKEN,
       stopwordLanguages: ["fra"],
     },
   },
