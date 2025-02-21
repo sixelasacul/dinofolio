@@ -25,6 +25,12 @@ export default defineConfig({
       publicFolder: "public",
     },
   },
+  search: {
+    tina: {
+      indexerToken: process.env.TINA_SEARCH_TOKEN,
+      stopwordLanguages: ["fra"],
+    },
+  },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
     collections: [
@@ -32,6 +38,12 @@ export default defineConfig({
         name: "dinos",
         label: "Dinos",
         path: "src/content/dinos",
+        // for visual editing
+        // ui: {
+        //   router({ document }) {
+        //     return `/dinos/${document._sys.filename}`;
+        //   },
+        // },
         fields: [
           {
             type: "string",

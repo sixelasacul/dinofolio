@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --font-cursive: "Bagel Fat One", cursive;
+  --font-mono: "Roboto Mono", monospace;
+}
+
+.font-display {
+  @apply uppercase font-cursive text-5xl;
+}
+
+.font-heading {
+  @apply uppercase font-cursive text-3xl;
+}
+
+.font-title {
+  @apply font-mono font-bold text-lg;
+}
+
+.font-body {
+  @apply font-mono;
+}
