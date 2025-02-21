@@ -18,35 +18,45 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { dino } = Astro.params;
-const {colors, createdAt: _createdAt, dinosaurs, image, title, tools, description: _description} = Astro.props;
-const description =  _description?.trim()
+const {
+  colors,
+  createdAt: _createdAt,
+  dinosaurs,
+  image,
+  title,
+  tools,
+  description: _description,
+} = Astro.props;
+const description = _description?.trim();
 
-const formatter = new Intl.DateTimeFormat('fr', {
-  dateStyle: 'long',
-})
-const createdAt = formatter.format(_createdAt)
+const formatter = new Intl.DateTimeFormat("fr", {
+  dateStyle: "long",
+});
+const createdAt = formatter.format(_createdAt);
 ---
 
 <Layout>
-  <div class="flex flex-row gap-4 items-start text-slate-50 relative">
-    <GradientImageCard class="rounded-4xl basis-2/3 p-8">
+  <div
+    class="flex flex-col xl:flex-row gap-4 items-start text-neutral-50 relative"
+  >
+    <GradientImageCard class="rounded-4xl xl:basis-2/3 p-2 md:p-8">
       {/* <Image> */}
       <img
         transition:name={`image-${dino}`}
-        class="rounded-4xl min-h-screen"
+        class="rounded-4xl xl:min-h-screen"
         src={image}
         alt={title}
         loading="eager"
       />
     </GradientImageCard>
 
-    <GradientTextCard class="sticky top-4 basis-1/3 p-4 rounded-xl grid grid-cols-1 gap-4">
-      <p class="font-bold">
+    <GradientTextCard
+      class="sticky top-20 xl:basis-1/3 p-4 rounded-xl grid grid-cols-1 gap-4"
+    >
+      <h1 class="font-heading">
         {title}
-      </p>
-      {description && (<p>
-        {description}
-      </p>)}
+      </h1>
+      {description && <p>{description}</p>}
       <p>Ajouté le {createdAt}</p>
 
       <ArrayDetails label="Dinosaures" list={dinosaurs} />
